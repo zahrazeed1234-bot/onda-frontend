@@ -1,7 +1,20 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-const API_BASE = '/api'
+const envBase = (import.meta.env.VITE_API_URL || '').trim()
+const isLocalhost = typeof window !== 'undefined' && ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname)
+
+const API_BASE = (() => {
+  if (envBase) {
+    return envBase.replace(/\/$/, '')
+  }
+
+  if (isLocalhost) {
+    return '/api'
+  }
+
+  return '/api'
+})()
 
 const api = axios.create({
   baseURL: API_BASE,
