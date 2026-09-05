@@ -2,6 +2,7 @@ import api from './client.js'
 
 export const authApi = {
   login: (data) => api.post('/auth/token/', data, { silent: true }),
+  register: (data) => api.post('/auth/register/', data, { silent: true }),
   me: () => api.get('/auth/users/me/'),
   changePassword: (userId, payload) => api.post(`/auth/users/${userId}/change_password/`, payload),
   listUsers: (params) => api.get('/auth/users/', { params }),
